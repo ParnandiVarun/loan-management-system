@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const connectDB = require("./config/db");
-
+require("./utils/emailScheduler");
 // Routes
 const authRoutes = require("./routes/authRoutes");
 const loanRoutes = require("./routes/loanRoutes");
@@ -10,7 +10,7 @@ const paymentRoutes = require("./routes/paymentRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 4000;
 
 // Connect Database
 connectDB();

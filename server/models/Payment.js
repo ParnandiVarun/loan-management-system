@@ -1,20 +1,24 @@
 const mongoose = require("mongoose");
 
-const userSchema = new mongoose.Schema(
+const paymentSchema = new mongoose.Schema(
   {
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    phone: String,
-    address: String,
-    creditScore: Number,
-    role: { type: String, enum: ["user", "admin"], default: "user" },
-    resetPasswordToken: String,
-    resetPasswordExpiry: Date,
-    googleId: String,
+    loanId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Loan",
+      required: true,
+    },
+    amount: { type: Number, required: true },
+    dueDate: { type: Date, required: true },
+    paidDate: Date,
+    status: {
+      type: String,
+      enum: ["upcoming", "paid", "overdue"],
+      default: "upcoming",
+    },
+    paymentMethod: String,
+    paymentNumber: Number,
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Payment", paymentSchema);
