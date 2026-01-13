@@ -41,8 +41,11 @@ app.use((req, res, next) => {
 });
 
 // Test Route
-app.get("/api/", (req, res) => {
-  res.json({ message: "Server is working!" });
+app.get("/", (req, res) => {
+  res.json({
+    message: "Loan Management System API is running 🚀",
+    status: "OK",
+  });
 });
 
 // Test Login
