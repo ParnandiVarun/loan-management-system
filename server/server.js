@@ -41,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 // Test Route
-app.get("/api/test", (req, res) => {
+app.get("/api/", (req, res) => {
   res.json({ message: "Server is working!" });
 });
 
