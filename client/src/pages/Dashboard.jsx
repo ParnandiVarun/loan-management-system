@@ -52,7 +52,6 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-
       <div className="max-w-7xl mx-auto px-6 py-8">
         <motion.div
           className="flex justify-between items-center mb-8"
@@ -78,7 +77,6 @@ const Dashboard = () => {
               Manage your loans and track payments
             </motion.p>
           </div>
-
           <motion.button
             onClick={() => (window.location.href = "/apply")}
             className="px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full font-medium"
@@ -116,14 +114,21 @@ const Dashboard = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <div className="bg-white rounded-xl p-6 shadow-lg">
+              <motion.div
+                className="bg-white rounded-xl p-6 shadow-lg"
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <div className="text-2xl font-bold text-blue-600">
                   {loans.length}
                 </div>
                 <div className="text-gray-600">Total Loans</div>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg">
+              </motion.div>
+              <motion.div
+                className="bg-white rounded-xl p-6 shadow-lg"
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <div className="text-2xl font-bold text-green-600">
                   {
                     loans.filter(
@@ -132,9 +137,12 @@ const Dashboard = () => {
                   }
                 </div>
                 <div className="text-gray-600">Approved</div>
-              </div>
-
-              <div className="bg-white rounded-xl p-6 shadow-lg">
+              </motion.div>
+              <motion.div
+                className="bg-white rounded-xl p-6 shadow-lg"
+                whileHover={{ scale: 1.02, y: -5 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
                 <div className="text-2xl font-bold text-yellow-600">
                   {
                     loans.filter(
@@ -143,7 +151,7 @@ const Dashboard = () => {
                   }
                 </div>
                 <div className="text-gray-600">Pending</div>
-              </div>
+              </motion.div>
             </motion.div>
 
             <motion.div
@@ -174,7 +182,6 @@ const Dashboard = () => {
           />
         )}
       </div>
-
       <Footer />
     </div>
   );

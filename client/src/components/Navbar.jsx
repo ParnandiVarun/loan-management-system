@@ -52,9 +52,12 @@ const Navbar = () => {
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center text-white font-bold text-lg shadow-lg">
-              L
+            <div className="w-10 h-10 bg-white border border-black-200 rounded-xl flex items-center justify-center font-bold text-lg shadow-md">
+              <span className="bg-gradient-to-br from-teal-500 to-emerald-600 bg-clip-text text-transparent">
+                LO
+              </span>
             </div>
+
             <Link
               to="/"
               className="text-2xl font-bold text-gray-900 tracking-tight"

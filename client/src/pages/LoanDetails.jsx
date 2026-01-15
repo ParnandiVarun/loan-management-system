@@ -34,11 +34,12 @@ const LoanDetails = () => {
     }
   };
 
-  const formatCurrency = (amount) =>
-    new Intl.NumberFormat("en-IN", {
+  const formatCurrency = (amount) => {
+    return new Intl.NumberFormat("en-IN", {
       style: "currency",
       currency: "INR",
     }).format(amount);
+  };
 
   const getStatusColor = (status) => {
     switch (status) {
@@ -47,6 +48,7 @@ const LoanDetails = () => {
       case "review":
         return "bg-blue-100 text-blue-800";
       case "approved":
+        return "bg-green-100 text-green-800";
       case "active":
         return "bg-green-100 text-green-800";
       case "rejected":
@@ -71,11 +73,23 @@ const LoanDetails = () => {
     return (
       <div className="min-h-screen bg-gray-50">
         <Navbar />
-        <div className="max-w-4xl mx-auto px-6 py-8 text-center">
-          <h2 className="text-2xl font-bold">Loan Not Found</h2>
-          <a href="/dashboard" className="text-blue-600 underline">
-            Back to Dashboard
-          </a>
+        <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="bg-white rounded-2xl p-12 text-center shadow-lg">
+            <div className="text-6xl mb-4">❌</div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Loan Not Found
+            </h2>
+            <p className="text-gray-600 mb-6">
+              The loan you're looking for doesn't exist or you don't have access
+              to it.
+            </p>
+            <a
+              href="/dashboard"
+              className="px-6 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700"
+            >
+              Back to Dashboard
+            </a>
+          </div>
         </div>
       </div>
     );
@@ -84,34 +98,152 @@ const LoanDetails = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-
       <div className="max-w-4xl mx-auto px-6 py-8">
-        <div className="flex justify-between mb-8">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold capitalize">
+            <h1 className="text-3xl font-bold text-gray-900 capitalize">
               {loan.type} Loan Details
             </h1>
-            <p>Application ID: {loan._id}</p>
+            <p className="text-gray-600 mt-2">Application ID: {loan._id}</p>
           </div>
-          <span className={`px-4 py-2 rounded ${getStatusColor(loan.status)}`}>
-            {loan.status}
+          <span
+            className={`px-4 py-2 rounded-full text-sm font-semibold ${getStatusColor(
+              loan.status
+            )}`}
+          >
+            {loan.status.charAt(0).toUpperCase() + loan.status.slice(1)}
           </span>
         </div>
 
-        <div className="bg-white p-6 rounded shadow mb-6">
-          <p>Amount: {formatCurrency(loan.amount)}</p>
-          <p>Interest Rate: {loan.interestRate}%</p>
-          <p>Term: {loan.term} months</p>
-          <p>Monthly EMI: {formatCurrency(loan.monthlyPayment)}</p>
+        {/* Main Details Card */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-6">
+                Loan Information
+              </h3>
+              <div className="space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Loan Type:</span>
+                  <span className="font-semibold capitalize">{loan.type}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Loan Amount:</span>
+                  <span className="font-semibold text-blue-600">
+                    {formatCurrency(loan.amount)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Interest Rate:</span>
+                  <span className="font-semibold">
+                    {loan.interestRate}% p.a.
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Term:</span>
+                  <span className="font-semibold">{loan.term} months</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Monthly Payment:</span>
+                  <span className="font-semibold text-green-600">
+                    {formatCurrency(loan.monthlyPayment)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Total Amount:</span>
+                  <span className="font-semibold">
+                    {formatCurrency(loan.monthlyPayment * loan.term)}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-6">
+                Personal Information
+              </h3>
+              <div className="space-y-4">
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Name:</span>
+                  <span className="font-semibold">
+                    {loan.firstName} {loan.lastName}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Email:</span>
+                  <span className="font-semibold">{loan.email}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Annual Income:</span>
+                  <span className="font-semibold">
+                    {formatCurrency(loan.income)}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Employment:</span>
+                  <span className="font-semibold capitalize">
+                    {loan.employment}
+                  </span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Purpose:</span>
+                  <span className="font-semibold">{loan.purpose}</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-600">Applied On:</span>
+                  <span className="font-semibold">
+                    {new Date(loan.createdAt).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div className="flex justify-center gap-4">
+        {/* Payment Summary */}
+        <div className="bg-white rounded-2xl shadow-lg p-8 mb-8">
+          <h3 className="text-xl font-bold text-gray-900 mb-6">
+            Payment Summary
+          </h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="bg-blue-50 rounded-xl p-6 text-center">
+              <div className="text-2xl font-bold text-blue-600">
+                {formatCurrency(loan.monthlyPayment)}
+              </div>
+              <div className="text-sm text-gray-600">Monthly EMI</div>
+            </div>
+            <div className="bg-green-50 rounded-xl p-6 text-center">
+              <div className="text-2xl font-bold text-green-600">
+                {formatCurrency(loan.monthlyPayment * loan.term)}
+              </div>
+              <div className="text-sm text-gray-600">Total Payable</div>
+            </div>
+            <div className="bg-orange-50 rounded-xl p-6 text-center">
+              <div className="text-2xl font-bold text-orange-600">
+                {formatCurrency(loan.monthlyPayment * loan.term - loan.amount)}
+              </div>
+              <div className="text-sm text-gray-600">Total Interest</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="/dashboard"
-            className="px-6 py-3 bg-gray-600 text-white rounded"
+            className="px-8 py-3 bg-gray-600 text-white rounded-full hover:bg-gray-700 text-center font-medium"
           >
             Back to Dashboard
           </a>
+          {(loan.status === "approved" || loan.status === "active") && (
+            <a
+              href="/calendar"
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-center font-medium"
+            >
+              View Payment Schedule
+            </a>
+          )}
         </div>
 
         {toast && (
@@ -122,7 +254,6 @@ const LoanDetails = () => {
           />
         )}
       </div>
-
       <Footer />
     </div>
   );

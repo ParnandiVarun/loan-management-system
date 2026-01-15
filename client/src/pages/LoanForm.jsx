@@ -122,67 +122,246 @@ const LoanForm = () => {
         <ProgressBar currentStep={currentStep} totalSteps={3} />
 
         <form onSubmit={handleSubmit} className="mt-6">
-          {/* STEP 1 */}
           {currentStep === 1 && (
-            <div>
-              <h2 className="text-2xl font-bold mb-6">Loan Details</h2>
+            <div className="space-y-6 opacity-100 transition-opacity duration-300">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Loan Details
+              </h2>
 
-              <select
-                value={formData.type}
-                onChange={(e) =>
-                  setFormData({ ...formData, type: e.target.value })
-                }
-                className="w-full p-2 border rounded mb-4"
-              >
-                <option value="">Select Loan Type</option>
-                <option value="personal">Personal</option>
-                <option value="home">Home</option>
-                <option value="auto">Auto</option>
-                <option value="education">Education</option>
-                <option value="business">Business</option>
-              </select>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Loan Type:
+                </label>
+                <select
+                  value={formData.type}
+                  onChange={(e) =>
+                    setFormData({ ...formData, type: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">Select loan type</option>
+                  <option value="personal">Personal Loan</option>
+                  <option value="home">Home Loan</option>
+                  <option value="auto">Auto Loan</option>
+                  <option value="education">Education Loan</option>
+                  <option value="business">Business Loan</option>
+                </select>
+                {errors.type && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.type}
+                  </span>
+                )}
+              </div>
 
-              <input
-                type="number"
-                placeholder="Loan Amount"
-                value={formData.amount}
-                onChange={(e) =>
-                  setFormData({ ...formData, amount: e.target.value })
-                }
-                className="w-full p-2 border rounded mb-4"
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Loan Amount (₹):
+                </label>
+                <input
+                  type="number"
+                  value={formData.amount}
+                  onChange={(e) =>
+                    setFormData({ ...formData, amount: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {errors.amount && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.amount}
+                  </span>
+                )}
+              </div>
 
-              <input
-                type="number"
-                placeholder="Term (months)"
-                value={formData.term}
-                onChange={(e) =>
-                  setFormData({ ...formData, term: e.target.value })
-                }
-                className="w-full p-2 border rounded"
-              />
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Term (months):
+                </label>
+                <input
+                  type="number"
+                  value={formData.term}
+                  onChange={(e) =>
+                    setFormData({ ...formData, term: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {errors.term && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.term}
+                  </span>
+                )}
+              </div>
 
               {monthlyPayment > 0 && (
-                <p className="mt-4 font-bold">
-                  Estimated EMI: ₹{monthlyPayment.toLocaleString("en-IN")}
-                </p>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="text-lg font-semibold text-blue-900">
+                    Estimated Monthly Payment: ₹
+                    {monthlyPayment.toLocaleString("en-IN")}
+                  </div>
+                </div>
               )}
             </div>
           )}
 
-          {/* Navigation */}
-          <div className="flex justify-between mt-8">
+          {currentStep === 2 && (
+            <div className="space-y-6 opacity-100 transition-opacity duration-300">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Financial Information
+              </h2>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Annual Income (₹):
+                </label>
+                <input
+                  type="number"
+                  value={formData.income}
+                  onChange={(e) =>
+                    setFormData({ ...formData, income: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {errors.income && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.income}
+                  </span>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Employment Status:
+                </label>
+                <select
+                  value={formData.employment}
+                  onChange={(e) =>
+                    setFormData({ ...formData, employment: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="">Select employment status</option>
+                  <option value="employed">Employed</option>
+                  <option value="self-employed">Self-Employed</option>
+                  <option value="unemployed">Unemployed</option>
+                  <option value="retired">Retired</option>
+                </select>
+                {errors.employment && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.employment}
+                  </span>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Loan Purpose:
+                </label>
+                <input
+                  type="text"
+                  value={formData.purpose}
+                  onChange={(e) =>
+                    setFormData({ ...formData, purpose: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {errors.purpose && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.purpose}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
+          {currentStep === 3 && (
+            <div className="space-y-6 opacity-100 transition-opacity duration-300">
+              <h2 className="text-2xl font-bold text-gray-900 mb-6">
+                Personal Information
+              </h2>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  First Name:
+                </label>
+                <input
+                  type="text"
+                  value={formData.firstName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, firstName: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {errors.firstName && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.firstName}
+                  </span>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Last Name:
+                </label>
+                <input
+                  type="text"
+                  value={formData.lastName}
+                  onChange={(e) =>
+                    setFormData({ ...formData, lastName: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {errors.lastName && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.lastName}
+                  </span>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email:
+                </label>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+                {errors.email && (
+                  <span className="text-red-500 text-xs mt-1 block">
+                    {errors.email}
+                  </span>
+                )}
+              </div>
+            </div>
+          )}
+
+          <div className="flex justify-between items-center mt-8">
             {currentStep > 1 && (
-              <button type="button" onClick={handlePrev}>
-                Back
+              <button
+                type="button"
+                onClick={handlePrev}
+                className="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors"
+              >
+                Previous
               </button>
             )}
             {currentStep < 3 ? (
-              <button type="button" onClick={handleNext}>
+              <button
+                type="button"
+                onClick={handleNext}
+                className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ml-auto"
+              >
                 Next
               </button>
             ) : (
-              <button type="submit">Submit</button>
+              <button
+                type="submit"
+                className="px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors ml-auto font-medium"
+              >
+                Submit Application
+              </button>
             )}
           </div>
         </form>

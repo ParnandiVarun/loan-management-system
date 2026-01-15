@@ -66,76 +66,96 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <motion.div
-        className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl"
-        initial={{ opacity: 0, y: 60 }}
+        className="max-w-md w-full space-y-8"
+        initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <h2 className="text-3xl font-extrabold text-center text-gray-900 mb-2">
-          Reset Password 🔐
-        </h2>
-        <p className="text-center text-gray-500 mb-6">
-          Enter your new secure password
-        </p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Reset Password
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Enter your new password
+          </p>
+        </motion.div>
 
-        <form onSubmit={handleSubmit} className="space-y-5">
+        <motion.form
+          className="mt-8 space-y-6"
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           <div>
-            <label className="text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700">
               New Password
             </label>
             <input
               type="password"
+              required
               value={formData.password}
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }
-              className="mt-1 w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               placeholder="Enter new password"
             />
+            <p className="mt-1 text-xs text-gray-500">
+              Must contain uppercase, lowercase, number and special character
+            </p>
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700">
+            <label className="block text-sm font-medium text-gray-700">
               Confirm Password
             </label>
             <input
               type="password"
+              required
               value={formData.confirmPassword}
               onChange={(e) =>
                 setFormData({ ...formData, confirmPassword: e.target.value })
               }
-              className="mt-1 w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="Confirm password"
+              className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              placeholder="Confirm new password"
             />
           </div>
 
           <motion.button
             type="submit"
             disabled={loading || !token}
-            className="w-full py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow hover:shadow-lg disabled:opacity-50"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+            whileHover={{ scale: 1.02, backgroundColor: "#1d4ed8" }}
+            whileTap={{ scale: 0.98 }}
           >
             {loading ? "Resetting..." : "Reset Password"}
           </motion.button>
-        </form>
+        </motion.form>
 
-        <div className="text-center mt-4">
-          <a href="/login" className="text-blue-600 hover:underline text-sm">
+        <div className="text-center">
+          <a
+            href="/login"
+            className="font-medium text-blue-600 hover:text-blue-500"
+          >
             Back to Login
           </a>
         </div>
-
-        {toast && (
-          <Toast
-            message={toast.message}
-            type={toast.type}
-            onClose={() => setToast(null)}
-          />
-        )}
       </motion.div>
+
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 };
