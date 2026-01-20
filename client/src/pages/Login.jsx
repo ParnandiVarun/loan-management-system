@@ -52,7 +52,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 font-sans">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 font-sans px-4 md:px-8">
       <motion.div
         className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-gray-100"
         initial={{ opacity: 0, y: 60 }}
@@ -68,7 +68,9 @@ const Login = () => {
           <h2 className="text-3xl font-extrabold text-gray-900">
             Welcome Back 👋
           </h2>
-          <p className="text-gray-500 mt-2">Login to continue to Loanova</p>
+          <p className="text-gray-500 mt-2 mr-11">
+            Login to continue to Loanova
+          </p>
         </motion.div>
 
         <form onSubmit={handleSubmit} className="space-y-5">

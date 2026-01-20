@@ -16,7 +16,7 @@ const Footer = () => {
         <div>
           <div className="flex items-center gap-3 mb-4">
             <div className="bg-white p-2 rounded-xl shadow-lg">
-              <img src={logo} alt="Loanova" className="w-10 h-10" />
+              <img src={logo} alt="Loanova" className="w-7 h-7" />
             </div>
             <h2 className="text-2xl font-bold text-white tracking-wide">
               Loanova
@@ -81,7 +81,7 @@ const Footer = () => {
                     {item}
                   </a>
                 </li>
-              )
+              ),
             )}
           </ul>
         </div>

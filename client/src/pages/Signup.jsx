@@ -49,7 +49,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-white to-purple-50 px-4 md:px-8 font-sans">
       <motion.div
         className="max-w-md w-full bg-white p-8 rounded-2xl shadow-xl border border-gray-100"
         initial={{ opacity: 0, y: 60 }}
