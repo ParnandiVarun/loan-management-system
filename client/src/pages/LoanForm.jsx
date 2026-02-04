@@ -111,7 +111,7 @@ const LoanForm = () => {
       ? calcMonthlyPayment(
           parseFloat(formData.amount),
           formData.interestRate,
-          parseInt(formData.term)
+          parseInt(formData.term),
         )
       : 0;
 
