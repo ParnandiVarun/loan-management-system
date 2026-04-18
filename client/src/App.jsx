@@ -18,7 +18,7 @@ import Signup from "./pages/Signup.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 
-/* 🔐 Secure Route Wrapper */
+/* Secure Route Wrapper */
 const ProtectedRoute = ({ children, adminOnly = false }) => {
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user") || "{}");

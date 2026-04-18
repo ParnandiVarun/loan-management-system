@@ -14,8 +14,7 @@ const API = axios.create({
   },
 });
 
-/**
- * 🔐 Attach JWT to every request
+/** Attach JWT to every request
  */
 API.interceptors.request.use(
   (config) => {
@@ -27,11 +26,11 @@ API.interceptors.request.use(
 
     return config;
   },
-  (error) => Promise.reject(error)
+  (error) => Promise.reject(error),
 );
 
 /**
- * 🚨 Global Error Handling
+ * Global Error Handling
  */
 API.interceptors.response.use(
   (response) => response,
@@ -52,7 +51,7 @@ API.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );
 
 export default API;
