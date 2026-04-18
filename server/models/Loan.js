@@ -12,7 +12,7 @@ const loanSchema = new mongoose.Schema(
     term: { type: Number, required: true },
     type: {
       type: String,
-      enum: ["personal", "home", "auto", "student", "bussiness"],
+      enum: ["personal", "home", "auto", "educational", "business"],
       required: true,
     },
     status: {
@@ -33,7 +33,7 @@ const loanSchema = new mongoose.Schema(
     employment: String,
     purpose: String,
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 module.exports = mongoose.model("Loan", loanSchema);
