@@ -12,7 +12,7 @@ const loanSchema = new mongoose.Schema(
     term: { type: Number, required: true },
     type: {
       type: String,
-      enum: ["personal", "home", "auto", "educational", "business"],
+      enum: ["personal", "home", "auto", "education", "business"],
       required: true,
     },
     status: {
